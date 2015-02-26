@@ -11,13 +11,17 @@ var onError = function(data, status) {
 
 $form.submit(function(event) {
   event.preventDefault();
-  var title = $form.find("#pageTitle").val();
-  var content = $form.find("#pageContent").val();
-  var pageID = $form.find("#submit".attr("name"));
-  $.get("editPageSubmit", {
-    title: title,
-    content: content,
-    pageID: pageID
+
+    var title = $form.find("#pageTitle").val();
+    var content = $form.find("#pageContent").val();
+    var pageID = $form.find("#pageTitle").attr("name");
+
+    alert("title: " + title+ "     content: "+content + "     pageID: "+pageID);
+
+  $.post("editPageSubmit", {
+    newPageTitle: title,
+    newPageContent: content,
+    newPageID: pageID
   })
     .done(onSuccess)
     .error(onError);

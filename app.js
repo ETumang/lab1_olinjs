@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //routes!
 app.get("/editPage", pages.showEditable)
-app.get("/editPageSubmit", pages.editPageSubmit)
+app.post("/editPageSubmit", pages.editPageSubmit)
 
 
 //connect to mongoose
