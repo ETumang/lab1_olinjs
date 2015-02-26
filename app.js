@@ -6,9 +6,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
-var session = require('express-session');
-var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
+
 
 var app = express();
 
@@ -30,11 +28,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(session({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: true
-}));
 
 //routes!
 app.get("/editPage", pages.showEditable)

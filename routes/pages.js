@@ -7,20 +7,26 @@ var pages = {};
 pages.showEditable = function(req,res){
 	var id = req.id
 	if (!id){
-		page = new Page{
+		page = new Page ({
 			content:"",
 			title:"",
 			links:[]
-		}
-		page.save()
-		id = page.id
+		});
+		page.save(function (err) {
+	    	if (err) {
+	    		console.log("Something broke!");
+	    	}
+	    	else {
+	    		id = page.id;
+	    	}
+		});
 	}
 
 	var toEdit = Page.findById(id)
 
 	res.render('editForm',{
 		title:toEdit.title,
-		content:toEdit.content
+		content:toEdit.content,
 		id:id
 	})
 }
@@ -36,3 +42,5 @@ pages.editPageSubmit = function(req,res){
 	})
 
 }
+
+module.exports = pages;
