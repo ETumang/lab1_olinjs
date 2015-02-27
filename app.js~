@@ -31,14 +31,14 @@ app.get("/editPage", pages.showEditable)
 app.get("/contentPage", pages.showPage)
 app.post("/editPageSubmit", pages.editPageSubmit)
 app.get("/",function(req,res){
-	res.send(":(");
+	res.send(":(")
 })
 
 
 //connect to mongoose
 mongoose.connect(mongoURI);
 
-app.listen(PORT, function(){
+app.listen(PORT, function() {
   console.log("Application running on port:", PORT);
 });
 

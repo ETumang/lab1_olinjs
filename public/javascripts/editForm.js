@@ -2,6 +2,7 @@ var $form = $("#editPageInput");
 
 var onSuccess = function(data, status) {
   alert("Edit page has been submitted yayyyyyy");
+  window.location.href="/contentPage";
 };
 
 var onError = function(data, status) {

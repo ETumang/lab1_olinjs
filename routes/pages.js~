@@ -39,12 +39,9 @@ pages.showEditable = function(req,res){
 
 pages.editPageSubmit = function(req,res){
 
-
 	var newTitle = req.body.newPageTitle;
 	var newContent = req.body.newPageContent;
 	var links = [];
-
-	console.log(req.body.newPageID);
 
 	Page.findOne({'_id': req.body.newPageID}, function (err, toChangePage) {
 		if (err) {
@@ -55,9 +52,14 @@ pages.editPageSubmit = function(req,res){
 			toChangePage.title = newTitle;
 			toChangePage.content=newContent;
 			toChangePage.links = links;
-			toChangePage.save();
+
+			res.render('contentPage',{
+				id:pageID,
+				title:newTitle,
+				content:newContent,
+				links: links
+			})
 		}
-		res.end();
 	})
 }
 
@@ -68,6 +70,7 @@ pages.showPage = function(req,res){
 			console.log("err: " + err);
 		}
 		else {
+
 			res.render('contentPage',{
 				id:req.id,
 				title:toShowPage.title,
