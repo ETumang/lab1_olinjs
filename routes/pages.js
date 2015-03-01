@@ -5,7 +5,7 @@ var Page = require(path.join(__dirname,"../models/models")).page;
 var pages = {};
 
 pages.showEditable = function(req,res){
-	var id = req.id
+	var id = req.body.id;
 	if (!id){
 		page = new Page ({
 			content:"",
@@ -17,25 +17,45 @@ pages.showEditable = function(req,res){
 	    		console.log("Something broke!");
 	    	}
 	    	else {
-	    		id = page.id;
-	    	}
-		});
-	}
+	    		id = page._id;
+	    		console.log("Before finding: "+ id)
+	    		console.log(page._id === id)
 
-	var toEdit = Page.findById(id).exec(function (err, toEditPage) {
+	    		Page.findOne({"_id":id}).exec(function (err, toEditPage) {
+					console.log("page: "+toEditPage);
+					console.log(id)
+					if (err) {
+						return console.log ("Something broke");
+					}
+					else {
+						res.render('editForm',{
+							title:toEditPage.title,
+							content:toEditPage.content,
+							pageID:id
+						})
+					}
+	    		})
+	    	}	
+		})	
+	}
+}
+
+/*	Page.findOne({"_id":id}).exec(function (err, toEditPage) {
+		console.log("page: "+toEditPage);
+		console.log(id)
 		if (err) {
 			return console.log ("Something broke");
 		}
 		else {
 			res.render('editForm',{
-				title:toEdit.title,
-				content:toEdit.content,
+				title:toEditPage.title,
+				content:toEditPage.content,
 				pageID:id
 			})
 		}
-	});
+	})*/
 
-}
+//}
 
 pages.editPageSubmit = function(req,res){
 
@@ -57,7 +77,7 @@ pages.editPageSubmit = function(req,res){
 			toChangePage.links = links;
 			toChangePage.save();
 		}
-		res.end();
+		res.json({id:req.body.newPageID});
 	})
 }
 

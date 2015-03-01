@@ -1,7 +1,8 @@
 var $form = $("#editPageInput");
 
 var onSuccess = function(data, status) {
-  var id = $this.data()
+  console.log("data" + data);
+  var id = data.id;
   alert(id);
    $.post("displayEdited", {id:id})
     .done(function(data,status){
@@ -28,7 +29,6 @@ $form.submit(function(event) {
     newPageTitle: title,
     newPageContent: content,
     newPageID: pageID
-  })
-    .done(onSuccess)
-    .error(onError);
+  }).done(onSuccess).error(onError)
+
 });
