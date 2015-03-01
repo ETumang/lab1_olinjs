@@ -1,10 +1,12 @@
 var $form = $("#editPageInput");
 
 var onSuccess = function(data, status) {
-  var id = data.id;
-   $.post("displayEdited", {id:id})
+  var id = data._id;
+  console.log("Data is : "+data)
+   $.get("displayEdited/"+data._id)
     .done(function(data,status){
-      console.log("Load edited content")
+      console.log(data)
+      $("#content").html(data);
     })
     .error(onError);
 };

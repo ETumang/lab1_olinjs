@@ -55,23 +55,21 @@ pages.editPageSubmit = function(req,res){
 			toChangePage.links = links;
 			toChangePage.save();
 		}
-		res.json({id:req.body.newPageID});
+		res.json(toChangePage);
 	})
 }
 
 pages.showPage = function(req,res){
-	Page.findOne({'_id': req.body.id}).exec(function (err, toShowPage)  {
+	id = req.param("id")
+	console.log("The page to load is: "+id)
+	Page.findOne({'_id': id}).exec(function (err, toShowPage)  {
 		if (err) {
 			res.send ("There was an error!");
 			console.log("err: " + err);
 		}
 		else{
-			res.render('contentPage'
-				// id:req.body.id,
-				// title:toShowPage.title,
-				// content:toShowPage.content,
-				// links: toShowPage.links
-				)
+			console.log("page Data: "+ toShowPage)
+			res.json(toShowPage);
 		}
 	})
 }

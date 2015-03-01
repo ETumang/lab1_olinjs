@@ -32,7 +32,7 @@ app.post("/editPageSubmit", pages.editPageSubmit)
 app.get("/",function(req,res){
 	res.send(":(")
 })
-app.post("/displayEdited", pages.showPage)
+app.get("/displayEdited/:id", pages.showPage)
 
 
 //connect to mongoose
