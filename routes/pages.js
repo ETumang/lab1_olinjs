@@ -63,7 +63,7 @@ pages.editPageSubmit = function(req,res){
 	var newContent = req.body.newPageContent;
 	var links = [];
 
-	console.log(req.body.newPageID);
+	console.log("ID" + req.body.newPageID);
 
 	Page.findOne({'_id': req.body.newPageID}, function (err, toChangePage) {
 		if (err){
