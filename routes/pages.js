@@ -18,12 +18,9 @@ pages.showEditable = function(req,res){
 	    	}
 	    	else {
 	    		id = page._id;
-	    		console.log("Before finding: "+ id)
-	    		console.log(page._id === id)
 
 	    		Page.findOne({"_id":id}).exec(function (err, toEditPage) {
-					console.log("page: "+toEditPage);
-					console.log(id)
+
 					if (err) {
 						return console.log ("Something broke");
 					}
@@ -40,32 +37,13 @@ pages.showEditable = function(req,res){
 	}
 }
 
-/*	Page.findOne({"_id":id}).exec(function (err, toEditPage) {
-		console.log("page: "+toEditPage);
-		console.log(id)
-		if (err) {
-			return console.log ("Something broke");
-		}
-		else {
-			res.render('editForm',{
-				title:toEditPage.title,
-				content:toEditPage.content,
-				pageID:id
-			})
-		}
-	})*/
-
-//}
-
 pages.editPageSubmit = function(req,res){
 
 	var newTitle = req.body.newPageTitle;
 	var newContent = req.body.newPageContent;
 	var links = [];
 
-	console.log("ID" + req.body.newPageID);
-
-	Page.findOne({'_id': req.body.newPageID}, function (err, toChangePage) {
+	Page.findOne({'_id': req.body.newPageID}).exec(function (err, toChangePage) {
 		if (err){
 			res.send ("There was an error!");
 			console.log("err: " + err);
@@ -82,20 +60,18 @@ pages.editPageSubmit = function(req,res){
 }
 
 pages.showPage = function(req,res){
-	Page.findOne({'_id': req.id}, function (err, toShowPage) {
-		console.log(req.id)
+	Page.findOne({'_id': req.body.id}).exec(function (err, toShowPage)  {
 		if (err) {
 			res.send ("There was an error!");
 			console.log("err: " + err);
 		}
 		else{
-			console.log(toShowPage);
-			res.render('contentPage',{
-				id:req.id,
-				title:toShowPage.title,
-				content:toShowPage.content,
-				links: toShowPage.links
-			})
+			res.render('contentPage'
+				// id:req.body.id,
+				// title:toShowPage.title,
+				// content:toShowPage.content,
+				// links: toShowPage.links
+				)
 		}
 	})
 }

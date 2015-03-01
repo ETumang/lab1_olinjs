@@ -28,7 +28,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //routes!
 app.get("/editPage", pages.showEditable)
-app.get("/contentPage", pages.showPage)
 app.post("/editPageSubmit", pages.editPageSubmit)
 app.get("/",function(req,res){
 	res.send(":(")

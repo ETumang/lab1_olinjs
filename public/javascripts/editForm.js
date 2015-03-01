@@ -1,9 +1,7 @@
 var $form = $("#editPageInput");
 
 var onSuccess = function(data, status) {
-  console.log("data" + data);
   var id = data.id;
-  alert(id);
    $.post("displayEdited", {id:id})
     .done(function(data,status){
       console.log("Load edited content")
@@ -22,8 +20,6 @@ $form.submit(function(event) {
     var title = $form.find("#pageTitle").val();
     var content = $form.find("#pageContent").val();
     var pageID = $form.find("#pageTitle").attr("name");
-
-    alert("title: " + title+ "     content: "+content + "     pageID: "+pageID);
 
   $.post("editPageSubmit", {
     newPageTitle: title,
