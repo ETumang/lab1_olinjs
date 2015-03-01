@@ -1,8 +1,13 @@
 var $form = $("#editPageInput");
 
 var onSuccess = function(data, status) {
-  alert("Edit page has been submitted yayyyyyy");
-  window.location.href="/contentPage";
+  var id = $this.data()
+  alert(id);
+   $.post("displayEdited", {id:id})
+    .done(function(data,status){
+      console.log("Load edited content")
+    })
+    .error(onError);
 };
 
 var onError = function(data, status) {

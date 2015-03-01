@@ -31,8 +31,9 @@ app.get("/editPage", pages.showEditable)
 app.get("/contentPage", pages.showPage)
 app.post("/editPageSubmit", pages.editPageSubmit)
 app.get("/",function(req,res){
-	res.send(":(");
+	res.send(":(")
 })
+app.post("displayEdited", pages.showPage)
 
 
 //connect to mongoose
