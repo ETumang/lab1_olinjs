@@ -4,12 +4,29 @@
     <meta charset="utf-8">
     <title>The Client!</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <script src="wrapper.tag" type="riot/tag"></script>
+    <script src="https://cdn.jsdelivr.net/g/riot@2.0(riot.min.js+compiler.min.js)"></script>
+
     <link href="stylesheets/styles.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    {{{body}}}
+    <wrapper></wrapper>
 </body>
+
+<script> 
+	riot.mount('wrapper', {
+      title: 'I want to behave!',
+      items: [
+        { title: 'Avoid excessive coffeine', done: true },
+        { title: 'Hidden item', hidden: true },
+        { title: 'Be less provocative' },
+        { title: 'Be nice to people' }
+      ]
+    })
+</script>
+
 <script type="text/javascript" src="javascripts/editForm.js"></script>
 
 
