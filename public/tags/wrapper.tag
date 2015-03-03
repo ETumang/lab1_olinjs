@@ -1,13 +1,13 @@
 <wrapper>
 	<div if !{is_editable} class="wrapper">
-		<titleTag title={opts.title}></titleTag>
+		<titletag title={opts.title}></titletag>
 		<content content={opts.content}></content>
 		<links links={opts.links}></links>
-		<editButton text= {opts.text}></editButton>
+		<editbutton text= {opts.text}></editbutton>
 	</div>
 
 	<div if {is_editable} class="wrapper">
-		<editForm title ={opts.title} content={opts.content} pageID={opts.pageID}></editForm>
+		<editform title ={opts.title} content={opts.content} pageID={opts.pageID}></editform>
 	</div>
 
 	 <!--script> 

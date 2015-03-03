@@ -1,4 +1,4 @@
-<editButton onclick={ clicked }>
+<editbutton onclick={ clicked }>
 
 	<button type = "button">{opts.text}</button>
 
@@ -9,4 +9,4 @@
 
 	</script>
 
-</editButton>
+</editbutton>

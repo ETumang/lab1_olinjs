@@ -1,4 +1,4 @@
-<editForm onsubmit={ add }>
+<editform onsubmit={ add }>
 	<div class="editPage" name="{opts.pageID}">
 		<form id="editPageInput">
 			<div id="titleInput" >
@@ -53,6 +53,6 @@
 
    	</script>
 
-</editForm>
+</editform>
 
 	
