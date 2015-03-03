@@ -18,8 +18,22 @@
 		<button type = "button">{buttontext}</button>
 	</div>
 
-	<div if={editable}>
-		<p>Text</p>
+	<div id="form" onsubmit={ add } if={editable}>
+		<form id="editPageInput">
+			<div id="titleInput" >
+				<label for="pageTitle">Title of Page</label>
+			    <input id="pageTitle" type="text" value="{title}" name="{pageID}" onkeyup={ edit }> 
+		    </div>   
+
+		    <div id="contentInput">
+				<label for="pageContent">Content of Page</label>
+			    <input id="pageContent" type="text" value="{content}">  
+			</div>
+
+		    <input type="submit" id="submit" value="Submit"/>
+
+		</form>
+
 	</div>
 
 	<script>
@@ -28,6 +42,8 @@
 	this.content=opts.content;
 	this.links = opts.links;
 	this.buttontext=opts.buttontext;
+	this.pageID=opts.pageID;
+
 
 	this.contentable = opts.contentable;
 	this.editable = opts.editable;
@@ -47,10 +63,39 @@
 
 		clicked(e){
 	 		console.log("Triggered a switch")
-			// this.trigger('switch')
 			this.editable=!this.editable;
 			this.contentable=!this.contentable;
 		}
+
+		add(e){
+
+    		var $form=$("#form");
+
+			var title = $form.find("#pageTitle").val();
+		    var content = $form.find("#pageContent").val();
+		    var pageID = $form.find("#pageTitle").attr("name");
+
+			$.post("editPageSubmit", {
+			    newPageTitle: title,
+			    newPageContent: content,
+			    newPageID: pageID
+			})
+			.done(onSuccess).error(onError);
+
+      	var onSuccess = function(data, status) {
+			this.editable=!this.editable;
+			this.contentable=!this.contentable;
+
+			var id = data._id;
+
+			self.update(data);
+		}
+
+		var onError = function(data, status) {
+		  console.log("status", status);
+		  console.log("error", data);
+		}
+	}
 
 	</script>
 

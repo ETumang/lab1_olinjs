@@ -61,12 +61,12 @@ pages.editPageSubmit = function(req,res){
 			toChangePage.links = links;
 			toChangePage.save();
 		}
+		console.log("toChangePage: "+toChangePage)
 		res.json(toChangePage);
 	})
 }
 
 pages.showPage = function(req,res){
-	console.log("showPage")
 	id = req.param("id")
 	Page.findOne({'_id': id}).exec(function (err, toShowPage)  {
 		if (err) {
@@ -74,7 +74,6 @@ pages.showPage = function(req,res){
 			console.log("err: " + err);
 		}
 		else{
-			console.log("page Data: "+ toShowPage)
 			res.json(toShowPage);
 		}
 	})
