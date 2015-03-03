@@ -1,9 +1,11 @@
-<editButton>
+<editButton onclick={ clicked }>
 
 	<button type = "button">{opts.text}</button>
 
 	<script>
-		if opts.isSubTopic
+		clicked(e){
+			this.trigger('switch')
+		}
 
 	</script>
 
