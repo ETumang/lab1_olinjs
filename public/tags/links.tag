@@ -1,5 +1,5 @@
 <links>
 	<ul>
-		<li each ={opts.title}></li>
+		<li each ={opts.links}></li>
 	</ul>	
 </links>

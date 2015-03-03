@@ -3,12 +3,12 @@
 		<form id="editPageInput">
 			<div id="titleInput" >
 				<label for="pageTitle">Title of Page</label>
-			    <input id="pageTitle" type="text" value="{title}" name="{pageID}" onkeyup={ edit }> 
+			    <input id="pageTitle" type="text" value="{opts.title}" name="{opts.pageID}" onkeyup={ edit }> 
 		    </div>   
 
 		    <div id="contentInput">
 				<label for="pageContent">Content of Page</label>
-			    <input id="pageContent" type="text" value="{content}">  
+			    <input id="pageContent" type="text" value="{opts.content}">  
 			</div>
 
 		    <input type="submit" id="submit" value="Submit"/>

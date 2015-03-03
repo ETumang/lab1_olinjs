@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/editPage", pages.showEditable)
 app.post("/editPageSubmit", pages.editPageSubmit)
 app.get("/",function(req,res){
-	res.send(":(")
+	res.render("home")
 })
 app.get("/displayEdited/:id", pages.showPage)
 
