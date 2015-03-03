@@ -1,39 +1,53 @@
 <article>
-	<div id="title" if={contentable}>
-		<h1>{title}</h1>
-	</div>
+		<div id="sidebar">
+			<h1>{topicTitle}</h1>
 
-	<div id="content" if={contentable}>
-		<p>{content}</p>
-	</div>
-
-	<div id="links" if={contentable}>
-		<ul>
-		    <li each="{name, i in links}">{name}
-		    </li>
-		</ul>
-	</div>
-
-	<div id = "editButton" onclick={ clicked }>
-		<button type = "button">{buttontext}</button>
-	</div>
-
-	<div id="form" onsubmit={ add } if={editable}>
-		<form id="editPageInput">
-			<div id="titleInput" >
-				<label for="pageTitle">Title of Page</label>
-			    <input id="pageTitle" type="text" value="{title}" name="{pageID}" onkeyup={ edit }> 
-		    </div>   
-
-		    <div id="contentInput">
-				<label for="pageContent">Content of Page</label>
-			    <input id="pageContent" type="text" value="{content}">  
+			<div id="links">
+				<ul>
+				    <li each="{name, i in links}" ><a href=("article/"+{name})>{name}</a> 
+				    </li>
+				</ul>
 			</div>
+		</div>
 
-		    <input type="submit" id="submit" value="Submit"/>
+	<div id="changing">
+		<div id="topicTitle" if={topicable}>
+			<h1>{topicTitle}</h1>
+		</div>
 
-		</form>
+		<div id="title" if={contentable}>
+			<h1>{title}</h1>
+		</div>
 
+		<div id="content" if={contentable}>
+			<p>{content}</p>
+		</div>
+
+		<div id = "editButton" if={contentable} onclick={ clickedEdit } >
+			<button type = "button">Edit</button>
+		</div>
+
+		<div id = "newButton" if={topicable} onclick={ clickedNew } >
+			<button type = "button">New</button>
+		</div>
+
+		<div id="form" onsubmit={ add } if={editable}>
+			<form id="editPageInput">
+				<div id="titleInput" >
+					<label for="pageTitle">Title of Page</label>
+				    <input id="pageTitle" type="text" value="{title}" name="{pageID}" onkeyup={ edit }> 
+			    </div>   
+
+			    <div id="contentInput">
+					<label for="pageContent">Content of Page</label>
+				    <input id="pageContent" type="text" value="{content}">  
+				</div>
+
+			    <input type="submit" id="submit" value="Submit"/>
+
+			</form>
+
+		</div>
 	</div>
 
 	<script>
@@ -41,12 +55,12 @@
 	this.title = opts.title;
 	this.content=opts.content;
 	this.links = opts.links;
-	this.buttontext=opts.buttontext;
+	this.topicTitle=opts.topicTitle;
 	this.pageID=opts.pageID;
-
 
 	this.contentable = opts.contentable;
 	this.editable = opts.editable;
+	this.topicable = opts.topicable;
 
 	var hashchange = function (type, ID) {
 
@@ -61,10 +75,16 @@
 		riot.route.exec(hashchange);
 		riot.route(hashchange);
 
-		clicked(e){
+		clickedEdit(e){
 	 		console.log("Triggered a switch")
 			this.editable=!this.editable;
 			this.contentable=!this.contentable;
+		}
+
+		clickedNew(e){
+	 		console.log("Triggered a switch")
+			this.editable=!this.editable;
+			this.topicable=!this.topicable;
 		}
 
 		add(e){
@@ -82,7 +102,9 @@
 			})
 			.done(onSuccess).error(onError);
 
+//TODO- onSuccess isn't being called, so you have to refresh to see new data
       	var onSuccess = function(data, status) {
+      		console.log("onsuccess")
 			this.editable=!this.editable;
 			this.contentable=!this.contentable;
 

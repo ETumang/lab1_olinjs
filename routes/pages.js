@@ -1,6 +1,7 @@
 //require my modules
 var path = require("path");
 var Page = require(path.join(__dirname,"../models/models")).page;
+var Links = require(path.join(__dirname,"../models/models")).linkList;
 
 var pages = {};
 
@@ -24,6 +25,10 @@ pages.showEditable = function(req,res){
 	    	}
 	    	else {
 	    		id = page._id;
+
+				Links.find(function(err,masterLinks){
+					masterLinks[0].links[masterLinks[0].links.length()] = id;
+				});
 
 	    		Page.findOne({"_id":id}).exec(function (err, toEditPage) {
 
@@ -60,9 +65,11 @@ pages.editPageSubmit = function(req,res){
 			toChangePage.content=newContent;
 			toChangePage.links = links;
 			toChangePage.save();
+
+			console.log("toChangePage: "+toChangePage)
+			res.json(toChangePage);
 		}
-		console.log("toChangePage: "+toChangePage)
-		res.json(toChangePage);
+
 	})
 }
 
@@ -74,8 +81,29 @@ pages.showPage = function(req,res){
 			console.log("err: " + err);
 		}
 		else{
-			res.json(toShowPage);
+			Links.find().exec(function (err, allLinks) {
+				if (err) {
+					res.send ("There was an error!");
+					console.log("err: " + err);
+				}
+				else{
+					toShowPage.links=allLinks[0].links;
+					res.json(toShowPage);
+				}
+			});
 		}
 	})
+}
+
+pages.getLinkList = function (req, res) {
+	Links.find().exec(function (err, allLinks) {
+		if (err) {
+			res.send ("There was an error!");
+			console.log("err: " + err);
+		}
+		else{
+			res.json(allLinks);
+		}
+	});
 }
 module.exports = pages;
