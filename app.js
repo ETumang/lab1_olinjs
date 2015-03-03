@@ -27,12 +27,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 //routes!
-app.get("/editPage", pages.showEditable)
 app.post("/editPageSubmit", pages.editPageSubmit)
-app.get("/",function(req,res){
-	res.render("home")
-})
-app.get("/displayEdited/:id", pages.showPage)
+app.get("/",pages.home);
+app.get("/article/:id", pages.showPage);
 
 
 //connect to mongoose

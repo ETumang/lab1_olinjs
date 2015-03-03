@@ -4,6 +4,12 @@ var Page = require(path.join(__dirname,"../models/models")).page;
 
 var pages = {};
 
+pages.home = function(req,res){
+	res.render("home")
+}
+
+
+
 pages.showEditable = function(req,res){
 	var id = req.body.id;
 	if (!id){
@@ -60,8 +66,8 @@ pages.editPageSubmit = function(req,res){
 }
 
 pages.showPage = function(req,res){
+	console.log("showPage")
 	id = req.param("id")
-	console.log("The page to load is: "+id)
 	Page.findOne({'_id': id}).exec(function (err, toShowPage)  {
 		if (err) {
 			res.send ("There was an error!");

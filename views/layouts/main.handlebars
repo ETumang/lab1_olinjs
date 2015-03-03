@@ -7,6 +7,10 @@
 
     <link href="stylesheets/styles.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+    	<script src="/tags/article.tag" type="riot/tag"></script>
+
+    <script src="https://cdn.jsdelivr.net/g/riot@2.0(riot.min.js+compiler.min.js)"></script>
 </head>
 <body>
 	{{{body}}}
@@ -15,6 +19,21 @@
 
 
 <script type="text/javascript" src="javascripts/editForm.js"></script>
+
+	<script> 
+		riot.mount('*', {
+			editable: false,
+			contentable: true,
+			// content:"Hello",
+			// title: "Title",
+			// links: [
+			// 	    { title: 'First item'},
+			// 	    { title: 'Second item' },
+			// 	    { title: 'Third item' }],
+			pageID: "54ee9b3220906a12400c51b4",
+			buttontext: "edit"
+	    })
+	</script>
 
 
 </html>
