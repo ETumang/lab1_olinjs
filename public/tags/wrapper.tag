@@ -10,9 +10,9 @@
 		<editForm title ={opts.title} content={opts.content} pageID={opts.pageID}></editForm>
 	</div>
 
-	<script> 
-		this.on("switch" function () {
-			var is_editable= !is_editable;
-		})
-	</script>
+	 <!--script> 
+	// 	this.on("switch" function () {
+	// 		var is_editable= !is_editable;
+	// 	})
+	 </script-->
 </wrapper>

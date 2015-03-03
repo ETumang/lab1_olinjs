@@ -1,15 +1,28 @@
 <body>
 
-	<wrapper></wrapper>
-	
+	{{!-- <wrapper></wrapper> --}}
+	<titletag></titletag>
+
+	<!--script src="tags/wrapper.tag" type="riot/tag"></script-->
+    <script src="tags/titleTag.tag" type="riot/tag"></script>
+    <!--script src="tags/content.tag" type="riot/tag"></script>
+    <script src="tags/links.tag" type="riot/tag"></script>
+    <script src="tags/editForm.tag" type="riot/tag"></script>
+    <script src="tags/editButton.tag" type="riot/tag"></script-->
+
+    <script src="https://cdn.jsdelivr.net/g/riot@2.0(riot.min.js+compiler.min.js)"></script>
+
 	<script> 
-		riot.mount('wrapper', {
-			is_editable: false,
-			title: "Title",
-			links: [],
-			pageID: "54ee9b3220906a12400c51b4",
-			text: "edit"
-	    })
+		riot.mount('titletag', {
+			title: "title"
+		})
+		// riot.mount('wrapper', {
+		// 	is_editable: false,
+		// 	title: "Title",
+		// 	links: [],
+		// 	pageID: "54ee9b3220906a12400c51b4",
+		// 	text: "edit"
+	 //    })
 	</script>
 
 </body>
