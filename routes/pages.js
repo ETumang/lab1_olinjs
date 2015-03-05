@@ -9,38 +9,30 @@ pages.home = function(req,res){
 	res.render("home")
 }
 
-pages.showEditable = function(req,res){
-	var id = req.body.id;
+pages.makeNew = function(req,res){
+	page = new Page ({
+		content:"Add content here",
+		title:"Add title here"
+	});
 
-	if (!id){
-		page = new Page ({
-			content:"",
-			title:""
-		});
+	page.save(function (err) {
+    	if (err) {
+    		console.log("Something broke!");
+    	}
+    	else {
+    		id = page._id;
 
-		page.save(function (err) {
-	    	if (err) {
-	    		console.log("Something broke!");
-	    	}
-	    	else {
-	    		id = page._id;
+    		Page.findOne({"_id":id}).exec(function (err, newPage) {
 
-	    		Page.findOne({"_id":id}).exec(function (err, toEditPage) {
-
-					if (err) {
-						return console.log ("Something broke");
-					}
-					else {
-						res.render('editForm',{
-							title:toEditPage.title,
-							content:toEditPage.content,
-							pageID:id
-						})
-					}
-	    		})
-	    	}	
-		})	
-	}
+				if (err) {
+					return console.log ("Something broke");
+				}
+				else {
+					res.json(newPage);
+				}
+	    	})
+	    }	
+	})	
 }
 
 pages.editPageSubmit = function(req,res){
