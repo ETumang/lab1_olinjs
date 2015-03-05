@@ -9,8 +9,6 @@ pages.home = function(req,res){
 	res.render("home")
 }
 
-
-
 pages.showEditable = function(req,res){
 	var id = req.body.id;
 	if (!id){
@@ -87,7 +85,6 @@ pages.showPage = function(req,res){
 					console.log("err: " + err);
 				}
 				else{
-					toShowPage.links=allLinks[0].links;
 					res.json(toShowPage);
 				}
 			});
@@ -95,15 +92,4 @@ pages.showPage = function(req,res){
 	})
 }
 
-pages.getLinkList = function (req, res) {
-	Links.find().exec(function (err, allLinks) {
-		if (err) {
-			res.send ("There was an error!");
-			console.log("err: " + err);
-		}
-		else{
-			res.json(allLinks);
-		}
-	});
-}
 module.exports = pages;
