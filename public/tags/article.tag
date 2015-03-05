@@ -1,8 +1,11 @@
 <article>
-	<div id="changing">
-		<div id="topicTitle" if={topicable}>
+		<div id="sidebar">
 			<h1>{topicTitle}</h1>
+
+			
 		</div>
+
+	<div id="changing">
 
 		<div id="title" if={contentable}>
 			<h1>{title}</h1>
@@ -14,10 +17,6 @@
 
 		<div id = "editButton" if={contentable} onclick={ clickedEdit } >
 			<button type = "button">Edit</button>
-		</div>
-
-		<div id = "newButton" if={topicable} onclick={ clickedNew } >
-			<button type = "button">New</button>
 		</div>
 
 		<div id="form" onsubmit={ add } if={editable}>
@@ -68,12 +67,6 @@
 	 		console.log("Triggered a switch")
 			this.editable=!this.editable;
 			this.contentable=!this.contentable;
-		}
-
-		clickedNew(e){
-	 		console.log("Triggered a switch")
-			this.editable=!this.editable;
-			this.topicable=!this.topicable;
 		}
 
 		add(e){
