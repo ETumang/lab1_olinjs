@@ -1,15 +1,4 @@
 <article>
-		<div id="sidebar">
-			<h1>{topicTitle}</h1>
-
-			<div id="links">
-				<ul>
-				    <li each="{name, i in links}" ><a href=("article/"+{name})>{name}</a> 
-				    </li>
-				</ul>
-			</div>
-		</div>
-
 	<div id="changing">
 		<div id="topicTitle" if={topicable}>
 			<h1>{topicTitle}</h1>
@@ -54,7 +43,7 @@
 	var self=this;
 	this.title = opts.title;
 	this.content=opts.content;
-	this.links = opts.links;
+
 	this.topicTitle=opts.topicTitle;
 	this.pageID=opts.pageID;
 

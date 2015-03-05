@@ -11,22 +11,19 @@ pages.home = function(req,res){
 
 pages.showEditable = function(req,res){
 	var id = req.body.id;
+
 	if (!id){
 		page = new Page ({
 			content:"",
-			title:"",
-			links:[]
+			title:""
 		});
+
 		page.save(function (err) {
 	    	if (err) {
 	    		console.log("Something broke!");
 	    	}
 	    	else {
 	    		id = page._id;
-
-				Links.find(function(err,masterLinks){
-					masterLinks[0].links[masterLinks[0].links.length()] = id;
-				});
 
 	    		Page.findOne({"_id":id}).exec(function (err, toEditPage) {
 
@@ -50,7 +47,6 @@ pages.editPageSubmit = function(req,res){
 
 	var newTitle = req.body.newPageTitle;
 	var newContent = req.body.newPageContent;
-	var links = [];
 
 	Page.findOne({'_id': req.body.newPageID}).exec(function (err, toChangePage) {
 		if (err){
@@ -61,7 +57,6 @@ pages.editPageSubmit = function(req,res){
 		else{
 			toChangePage.title = newTitle;
 			toChangePage.content=newContent;
-			toChangePage.links = links;
 			toChangePage.save();
 
 			console.log("toChangePage: "+toChangePage)
@@ -79,15 +74,7 @@ pages.showPage = function(req,res){
 			console.log("err: " + err);
 		}
 		else{
-			Links.find().exec(function (err, allLinks) {
-				if (err) {
-					res.send ("There was an error!");
-					console.log("err: " + err);
-				}
-				else{
-					res.json(toShowPage);
-				}
-			});
+			res.json(toShowPage);
 		}
 	})
 }

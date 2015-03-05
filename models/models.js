@@ -7,7 +7,7 @@ var PageSchema = new Schema({
 });
 
 var LinkSchema= new Schema ({
-	links: [String]
+	linkList: [String]
 })
 
 
