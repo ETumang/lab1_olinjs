@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.post("/editPageSubmit", pages.editPageSubmit)
 app.get("/",pages.home);
 app.get("/article/:id", pages.showPage);
-
+app.get("/makeNew", pages.makeNew);
 
 //connect to mongoose
 mongoose.connect(mongoURI);
