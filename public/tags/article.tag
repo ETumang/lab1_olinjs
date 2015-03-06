@@ -50,23 +50,37 @@
 	this.editable = opts.editable;
 	this.topicable = opts.topicable;
 
-	var hashchange = function (type, ID) {
+	var hashchange = function (type, ID, action) {
 
-		$.get("article/"+opts.pageID).done(function (data, err) {
-			console.log(data);
-			self.update(data);
-		}).error (function (status, err) {
-			console.log("status: "+status);
-		})
+		if (action==="content"||action==="new"){
+			$.get("article/"+ID).done(function (data, err) {
+				console.log(data);
+				this.contentable = true;
+				this.editable = false;
+				self.update(data);
+
+			}).error (function (status, err) {
+				console.log("status: "+status);
+			})
+			this.contentable = true;
+			this.editable = false;
+			self.update
+		}
+
+
+		if (action==="edit"||action==="new"){
+			this.contentable = false;
+			this.editable=true;
+			self.update();
+		}
+
 	};
 
 		riot.route.exec(hashchange);
 		riot.route(hashchange);
 
 		clickedEdit(e){
-	 		console.log("Triggered a switch")
-			this.editable=!this.editable;
-			this.contentable=!this.contentable;
+	 		riot.route("article/"+opts.pageID+"/edit")
 		}
 
 		add(e){
@@ -87,11 +101,8 @@
 //TODO- onSuccess isn't being called, so you have to refresh to see new data
       	var onSuccess = function(data, status) {
       		console.log("onsuccess")
-			this.editable=!this.editable;
-			this.contentable=!this.contentable;
-
+			riot.route("article/"+pageID+"content")
 			var id = data._id;
-
 			self.update(data);
 		}
 

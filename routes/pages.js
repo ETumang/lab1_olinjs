@@ -28,7 +28,7 @@ pages.makeNew = function(req,res){
 					return console.log ("Something broke");
 				}
 				else {
-					res.json(newPage);
+					res.json();
 				}
 	    	})
 	    }	
@@ -68,6 +68,12 @@ pages.showPage = function(req,res){
 		else{
 			res.json(toShowPage);
 		}
+	})
+}
+
+pages.showLinks=function(req,res){
+	Page.findAll().exec(function(err,pageList){
+
 	})
 }
 

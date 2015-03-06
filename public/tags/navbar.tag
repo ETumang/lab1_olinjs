@@ -21,31 +21,12 @@
 	 		console.log("New page clicked")
 
 	 		$.get("makeNew").done(function (data, err) {
-	 			riot.route("article/"+ data._id);
-	 			
+	 			riot.route("article/"+ data._id+"/edit");
+	 			//need to update link list 
+
 	 		}).error (function (status, err) {
 	 			console.log("status: "+ status);
 	 		})
-
-	 		//trigger this from other tag
-			this.editable=true;
-			this.topicable=false;
 		}
-
-		var hashchange = function (type, ID) {
-
-			$.get("article/"+opts.pageID).done(function (data, err) {
-				console.log(data);
-				self.update(data);
-			}).error (function (status, err) {
-				console.log("status: "+status);
-			})
-		};
-
-		riot.route.exec(hashchange);
-		riot.route(hashchange);
-
-
-
 	</script>
 </navbar>
